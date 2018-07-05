@@ -1,0 +1,42 @@
+
+
+mongoimport -d lab8db -c importExport restaurants.json
+2018-07-03T13:58:25.816-0500    connected to: localhost
+2018-07-03T13:58:26.057-0500    imported 3772 documents
+ use lab8db
+
+1. db.importExport.find()
+   db.importExport.find().pretty()
+2. db.importExport.find({},{restaurant_id:1, district:1, name:1, cuisine:1}).pretty()
+3. db.importExport.find({},{_id:0, district:1, name:1, cuisine:1}).pretty()
+
+
+
+4. db.importExport.find({},{_id:0, restaurant_id:1, district:1,"address.zipcode":1, name:1}).pretty()
+
+5. db.importExport.find({"district": "Bronx"}).pretty()
+6. db.importExport.find({"district": "Bronx"}).limit(5).pretty()
+
+7.db.importExport.find({"district": "Bronx"}).skip(5).limit(5).pretty()
+
+8.db.importExport.find({'address.coord': { $lt : -95.754168}}).pretty()
+
+9. db.importExport.find({ $and: [ {'cuisine': {$ne : 'American'}}, {'grades.score': {$gt : 70}},{'address.coord' : {$lt : -65.754168}}]}).pretty()
+
+10.db.importExport.find({'name': {$regex: /^Wil/i }},{'restaurant_id' : 1, 'name': 1, 'cuisine':1}).pretty()
+11. db.importExport.find({'name': {$regex: /ces$/i }},{'restaurant_id' : 1, 'name': 1, 'cuisine':1}).pretty()
+
+db.importExport.find({$and:[{"cuisine":{$ne:"American"}},{"grades.score":{$gt:70}},{"address.coord.1":{$lt:-95.754168}}]}).pretty()
+
+12. db.importExport.find({'name': {$regex: /Reg/i }},{'restaurant_id' : 1, 'name': 1, 'cuisine':1}).pretty()
+13. db.importExport.find({ $and : [ {'district': 'Bronx'}, {'cuisine': {$in: ['American', 'Chinese dish']}} ] }).pretty()
+14. db.importExport.find({'district': {$in: ['Staten','Island', 'Queens', 'Bronx', 'Brooklyn']}},{'restaurant_id' : 1, 'name': 1, 'cuisine':1}).pretty()
+15.db.importExport.find({'district': {$nin: ['Staten','Island', 'Queens', 'Bronx', 'Brooklyn']}},{'restaurant_id' : 1, 'name': 1, 'cuisine':1}).pretty()
+16.db.importExport.find({'grades.score': {$not:{$gt:10}},{'restaurant_id' : 1, 'name': 1, 'cuisine':1}).pretty()
+17.db.importExport.find({'address.coord.1':{$gt : 42, $lt : 52}},{'restaurant_id' :1, 'name':1, 'address.coord':1}).pretty()
+18. db.importExport.find({}).sort({'name':1}).pretty()
+19.db.importExport.find({}).sort({'name':-1}).pretty()
+20.db.importExport.find({}).sort({'cuisine':1, 'district': -1}).pretty()
+21.db.importExport.find({'address.street': {$exists : false}}).pretty()
+22. db.importExport.find({'address.coord': {$type : 'double'}}).pretty()
+23. db.importExport.find({'name' : {$regex: /^Mad/i}},{'name':1, 'district':1,'address:coord':1}).pretty()

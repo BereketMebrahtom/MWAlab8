@@ -1,0 +1,27 @@
+{
+        "_id" : ObjectId("5a679681096919beb1a74092"),
+        "booktitle" : "The Secret",
+        "ISBN" : "1582701709",
+		"Author": "Bere syum",
+        "keywords" : [
+                "secret",
+                "success"
+        ],
+        "borrower" : [
+                {
+                        "student" : "sogum",
+                        "returndate" : "07/05/2018"
+                },
+                {
+                        "student" : "Abi",
+                        "returndate" : "07/07/2018"
+                }
+        ]
+}
+
+/* 
+
+	Multi indexing on author and keywords .
+  Because both fields have variety in their values. db.book.createIndex({author: 1, keywords: 1 }). 
+to improve the library application performance
+*/
